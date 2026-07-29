@@ -126,6 +126,7 @@
       font-size: 0.85rem;
       transition: 0.2s;
       cursor: pointer;
+      font-family: inherit;
     }
     .btn-outline-nav:hover {
       background: var(--red);
@@ -162,6 +163,7 @@
       gap: 10px;
       border: 1px solid transparent;
       text-decoration: none !important;
+      font-family: inherit;
     }
     .btn-primary:hover {
       background: #c02b21;
@@ -182,6 +184,7 @@
       align-items: center;
       gap: 10px;
       text-decoration: none !important;
+      font-family: inherit;
     }
     .btn-secondary:hover {
       background: var(--charcoal);
@@ -403,6 +406,79 @@
       display: block;
     }
 
+    /* ===== MODAL POPUP ===== */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(6px);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      animation: fadeIn 0.3s ease;
+    }
+    .modal-overlay.active {
+      display: flex;
+    }
+    .modal-content {
+      background: white;
+      border-radius: 24px;
+      max-width: 700px;
+      width: 100%;
+      max-height: 90vh;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.2);
+      animation: slideUp 0.3s ease;
+    }
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: rgba(0,0,0,0.06);
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #555;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
+      z-index: 10;
+    }
+    .modal-close:hover {
+      background: rgba(0,0,0,0.12);
+      color: #000;
+    }
+    .modal-body {
+      padding: 30px 20px 20px;
+      overflow-y: auto;
+      max-height: 80vh;
+    }
+    .modal-body iframe {
+      width: 100%;
+      height: 600px;
+      border: 0;
+      display: block;
+      border-radius: 12px;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
     /* footer */
     .footer {
       background: var(--charcoal);
@@ -451,6 +527,7 @@
       .footer-grid { grid-template-columns: 1fr 1fr; }
       .hero-content h1 { font-size: 2.6rem; }
       .booking-wrapper iframe { height: 500px; }
+      .modal-body iframe { height: 500px; }
     }
     @media (max-width: 720px) {
       .nav-links {
@@ -473,6 +550,7 @@
       .about-icons { grid-template-columns: 1fr 1fr; }
       .business-name { font-size: 1rem; }
       .booking-wrapper iframe { height: 450px; }
+      .modal-body iframe { height: 450px; }
     }
     @media (max-width: 480px) {
       .services-grid, .features-grid, .about-icons { grid-template-columns: 1fr; }
@@ -481,6 +559,8 @@
       .contact-grid { padding: 20px; }
       .footer-grid { grid-template-columns: 1fr; }
       .booking-wrapper iframe { height: 400px; }
+      .modal-body iframe { height: 400px; }
+      .modal-content { max-width: 100%; margin: 10px; }
     }
     .bg-light { background: var(--light-gray); }
     .text-center { text-align: center; }
@@ -507,7 +587,9 @@
       <li><a href="#services">Services</a></li>
       <li><a href="#reviews">Reviews</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li><a href="#contact" class="btn-outline-nav">Book Appointment</a></li>
+      <li>
+        <button class="btn-outline-nav" onclick="openModal()">Book Appointment</button>
+      </li>
     </ul>
     <div class="nav-toggle" id="navToggle" aria-label="menu">
       <span></span><span></span><span></span>
@@ -522,7 +604,7 @@
       <h1>Reliable Auto Repair in <span>Calgary</span></h1>
       <p>Professional automotive repair and maintenance with honest service, experienced technicians, and quality workmanship.</p>
       <div class="hero-buttons">
-        <a href="#contact" class="btn-primary"><i class="fas fa-calendar-check"></i> Book Appointment</a>
+        <button onclick="openModal()" class="btn-primary"><i class="fas fa-calendar-check"></i> Book Appointment</button>
         <a href="tel:+14032871125" class="btn-secondary"><i class="fas fa-phone-alt"></i> Call (403) 287-1125</a>
       </div>
     </div>
@@ -633,6 +715,20 @@
   </div>
 </section>
 
+<!-- ===== MODAL POPUP ===== -->
+<div class="modal-overlay" id="bookingModal" onclick="closeModalOutside(event)">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-body">
+      <iframe 
+        src="https://tally.so/embed/ODKkap?dynamicHeight=1" 
+        loading="lazy"
+        title="Book an appointment with Red Rock Auto Repair">
+      </iframe>
+    </div>
+  </div>
+</div>
+
 <!-- Footer -->
 <footer class="footer">
   <div class="container footer-grid">
@@ -655,6 +751,30 @@
   const toggle = document.getElementById('navToggle');
   const links = document.getElementById('navLinks');
   toggle.addEventListener('click', () => links.classList.toggle('open'));
+
+  // ===== MODAL FUNCTIONS =====
+  function openModal() {
+    document.getElementById('bookingModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('bookingModal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function closeModalOutside(event) {
+    if (event.target === event.currentTarget) {
+      closeModal();
+    }
+  }
+
+  // Close modal with Escape key
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      closeModal();
+    }
+  });
 </script>
 </body>
 </html>
