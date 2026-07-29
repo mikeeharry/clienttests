@@ -63,7 +63,7 @@
       cursor: default;
     }
     .logo-placeholder {
-      background: var(--charcoal);
+      background: #ffffff; /* White background for logo */
       color: white;
       font-weight: 700;
       font-size: 1.0rem;
@@ -73,11 +73,12 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      border: 1px solid rgba(255,255,255,0.1);
+    /*  border: 1px solid #e0e0e0;  Subtle border to define the white area */
       transition: 0.2s;
       min-height: 48px;
       min-width: 52px;
       justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
     .logo-placeholder img {
       height: 36px;
@@ -429,6 +430,19 @@
       display: inline-flex;
       margin-bottom: 14px;
     }
+    /* Footer logo with white background */
+    .footer .logo-placeholder {
+      background: #ffffff;
+      padding: 6px 14px;
+      border-radius: 40px;
+      border: 1px solid #444;
+    }
+    .footer .logo-placeholder img {
+      height: 32px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+    }
 
     /* responsive */
     @media (max-width: 900px) {
@@ -480,7 +494,7 @@
   <div class="container nav-inner">
     <div class="logo-area">
       <div class="logo-brand">
-        <!-- Logo placeholder - replace src with your logo URL -->
+        <!-- Logo with white background container -->
         <div class="logo-placeholder" id="logoDisplay">
           <img src="assets/logo.png" alt="Red Rock Logo">
         </div>
@@ -623,8 +637,8 @@
 <footer class="footer">
   <div class="container footer-grid">
     <div>
-      <div class="logo-placeholder" style="background:#222; display:inline-flex; margin-bottom:14px;">
-        <img src="https://placehold.co/80x40/D73A2F/FFFFFF?text=RR" alt="Red Rock Logo" style="height:32px; width:auto;">
+      <div class="logo-placeholder" style="background:#ffffff; padding:6px 14px; border-radius:40px; border:1px solid #444; display:inline-flex; margin-bottom:14px;">
+        <img src="assets/logo.png" alt="Red Rock Logo" style="height:32px; width:auto; object-fit:contain; display:block;">
       </div>
       <p style="margin:16px 0 8px; font-size:0.95rem;">5011 11 St SE, Calgary, AB T2H 1M7</p>
       <p><a href="tel:+14032871125">(403) 287-1125</a></p>
