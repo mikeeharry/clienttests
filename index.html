@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+  <title>Red Rock Auto Repair · Calgary</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', 'Poppins', sans-serif;
+      background: #ffffff;
+      color: #333333;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    :root {
+      --red: #D73A2F;
+      --charcoal: #333333;
+      --light-gray: #F4F4F4;
+      --white: #FFFFFF;
+      --shadow-sm: 0 8px 24px rgba(0,0,0,0.04), 0 2px 8px rgba(0,0,0,0.02);
+      --radius-card: 20px;
+    }
+
+    /* navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.02);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: default;
+    }
+    .logo-placeholder {
+      background: var(--charcoal);
+      color: white;
+      font-weight: 700;
+      font-size: 1.0rem;
+      padding: 6px 14px;
+      border-radius: 40px;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: 0.2s;
+      min-height: 48px;
+      min-width: 52px;
+      justify-content: center;
+    }
+    .logo-placeholder img {
+      height: 36px;
+      width: auto;
+      max-width: 140px;
+      object-fit: contain;
+      display: block;
+    }
+    .logo-placeholder i {
+      color: var(--red);
+      font-size: 1.2rem;
+    }
+    .business-name {
+      font-weight: 700;
+      font-size: 1.2rem;
+      letter-spacing: -0.3px;
+      color: var(--charcoal);
+      white-space: nowrap;
+    }
+    .business-name span {
+      color: var(--red);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--charcoal);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--red); }
+    .btn-outline-nav {
+      background: transparent;
+      border: 1.5px solid var(--red);
+      color: var(--red);
+      padding: 8px 22px;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: 0.2s;
+      cursor: pointer;
+    }
+    .btn-outline-nav:hover {
+      background: var(--red);
+      color: white;
+    }
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-toggle span {
+      width: 26px;
+      height: 2.5px;
+      background: var(--charcoal);
+      border-radius: 4px;
+    }
+
+    /* buttons */
+    .btn-primary {
+      background: var(--red);
+      border: none;
+      color: white;
+      font-weight: 600;
+      padding: 14px 36px;
+      border-radius: 60px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 6px 16px rgba(215, 58, 47, 0.15);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid transparent;
+      text-decoration: none !important;
+    }
+    .btn-primary:hover {
+      background: #c02b21;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(215, 58, 47, 0.2);
+    }
+    .btn-secondary {
+      background: transparent;
+      border: 1.5px solid var(--charcoal);
+      color: var(--charcoal);
+      font-weight: 600;
+      padding: 14px 36px;
+      border-radius: 60px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none !important;
+    }
+    .btn-secondary:hover {
+      background: var(--charcoal);
+      color: white;
+      border-color: var(--charcoal);
+    }
+
+    section { padding: 70px 0; }
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 16px;
+      color: var(--charcoal);
+    }
+    .section-sub {
+      font-size: 1.1rem;
+      color: #555;
+      max-width: 640px;
+      margin-bottom: 40px;
+    }
+
+    /* hero */
+    .hero {
+      background: var(--light-gray);
+      padding: 40px 0 70px;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+    .hero-image {
+      border-radius: var(--radius-card);
+      height: 340px;
+      background-image: url('https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=800&h=500&fit=crop&crop=center&auto=format');
+      background-size: cover;
+      background-position: center;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(0,0,0,0.02);
+    }
+    .hero-content h1 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      color: var(--charcoal);
+    }
+    .hero-content h1 span { color: var(--red); }
+    .hero-content p {
+      font-size: 1.15rem;
+      color: #444;
+      margin: 20px 0 32px;
+      max-width: 480px;
+    }
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    /* about */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .about-image {
+      border-radius: var(--radius-card);
+      height: 280px;
+      background-image: url('https://images.unsplash.com/photo-1601362840469-51e4d8d58785?w=600&h=400&fit=crop&crop=center&auto=format');
+      background-size: cover;
+      background-position: center;
+    }
+    .about-icons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-top: 20px;
+    }
+    .icon-card {
+      background: var(--light-gray);
+      padding: 20px 16px;
+      border-radius: 18px;
+      text-align: center;
+      transition: 0.2s;
+      border: 1px solid rgba(0,0,0,0.02);
+    }
+    .icon-card i { font-size: 2rem; color: var(--red); margin-bottom: 10px; }
+    .icon-card h4 { font-weight: 600; font-size: 1rem; }
+
+    /* services */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 24px;
+      margin-top: 16px;
+    }
+    .service-card {
+      background: white;
+      border-radius: var(--radius-card);
+      padding: 24px 16px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(0,0,0,0.02);
+      transition: 0.2s;
+      text-align: center;
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 32px rgba(0,0,0,0.04);
+      border-color: rgba(215,58,47,0.1);
+    }
+    .service-card i { font-size: 2.2rem; color: var(--red); margin-bottom: 12px; }
+    .service-card h4 { font-weight: 600; font-size: 1rem; margin-bottom: 6px; }
+    .service-card p { font-size: 0.85rem; color: #666; }
+
+    /* why choose */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-top: 24px;
+    }
+    .feature-card {
+      background: white;
+      border-radius: 24px;
+      padding: 28px 22px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(0,0,0,0.02);
+      transition: 0.25s;
+      text-align: center;
+    }
+    .feature-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 36px rgba(0,0,0,0.04);
+    }
+    .feature-card i {
+      font-size: 2.4rem;
+      color: var(--red);
+      background: rgba(215,58,47,0.06);
+      padding: 16px;
+      border-radius: 60px;
+      margin-bottom: 16px;
+    }
+    .feature-card h4 {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+    }
+    .feature-card p {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    /* testimonials */
+    .testimonial-slider {
+      display: flex;
+      gap: 30px;
+      overflow-x: auto;
+      padding: 12px 4px 24px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .testimonial-slider::-webkit-scrollbar { height: 6px; }
+    .testimonial-slider::-webkit-scrollbar-thumb { background: #ccc; border-radius: 12px; }
+    .testimonial-card {
+      min-width: 280px;
+      flex: 0 0 auto;
+      background: white;
+      border-radius: var(--radius-card);
+      padding: 28px 24px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid #f0f0f0;
+      scroll-snap-align: start;
+    }
+    .stars { color: #f5b342; letter-spacing: 2px; font-size: 1.1rem; margin-bottom: 6px; }
+    .testimonial-card p { font-size: 0.95rem; color: #333; margin: 12px 0; }
+    .testimonial-card h5 { font-weight: 600; color: var(--charcoal); }
+
+    /* contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      background: var(--light-gray);
+      padding: 44px 44px;
+      border-radius: var(--radius-card);
+    }
+    .contact-info h3 { font-size: 1.6rem; font-weight: 600; margin-bottom: 12px; }
+    .contact-info p { margin: 10px 0; display: flex; align-items: center; gap: 12px; }
+    .contact-info i { width: 24px; color: var(--red); }
+    .map-container {
+      border-radius: 18px;
+      overflow: hidden;
+      margin: 16px 0;
+      height: 200px;
+      width: 100%;
+    }
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* booking form */
+    .booking-wrapper {
+      background: white;
+      border-radius: var(--radius-card);
+      padding: 0;
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+    .booking-wrapper iframe {
+      width: 100%;
+      height: 600px;
+      border: 0;
+      display: block;
+    }
+
+    /* footer */
+    .footer {
+      background: var(--charcoal);
+      color: #eaeaea;
+      padding: 50px 0 30px;
+      margin-top: 20px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+    }
+    .footer a { color: #ccc; text-decoration: none; transition: 0.2s; }
+    .footer a:hover { color: white; }
+    .footer-copy {
+      border-top: 1px solid #444;
+      margin-top: 40px;
+      padding-top: 24px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+    .footer .logo-placeholder {
+      background: #222;
+      display: inline-flex;
+      margin-bottom: 14px;
+    }
+
+    /* responsive */
+    @media (max-width: 900px) {
+      .hero-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .hero-grid { gap: 30px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .hero-content h1 { font-size: 2.6rem; }
+      .booking-wrapper iframe { height: 500px; }
+    }
+    @media (max-width: 720px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background: white;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        width: 100%;
+        padding: 30px 24px;
+        gap: 20px;
+        box-shadow: 0 16px 32px rgba(0,0,0,0.04);
+        border-bottom: 1px solid #f0f0f0;
+      }
+      .nav-links.open { display: flex; }
+      .nav-toggle { display: flex; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .features-grid { grid-template-columns: 1fr 1fr; }
+      .about-icons { grid-template-columns: 1fr 1fr; }
+      .business-name { font-size: 1rem; }
+      .booking-wrapper iframe { height: 450px; }
+    }
+    @media (max-width: 480px) {
+      .services-grid, .features-grid, .about-icons { grid-template-columns: 1fr; }
+      .hero-content h1 { font-size: 2.2rem; }
+      .section-title { font-size: 1.8rem; }
+      .contact-grid { padding: 20px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .booking-wrapper iframe { height: 400px; }
+    }
+    .bg-light { background: var(--light-gray); }
+    .text-center { text-align: center; }
+    .mt-16 { margin-top: 16px; }
+  </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="navbar">
+  <div class="container nav-inner">
+    <div class="logo-area">
+      <div class="logo-brand">
+        <!-- Logo placeholder - replace src with your logo URL -->
+        <div class="logo-placeholder" id="logoDisplay">
+          <img src="/assets/logo.png" alt="Red Rock Logo">
+        </div>
+        <span class="business-name">RED <span>ROCK</span> AUTO REPAIR</span>
+      </div>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#contact" class="btn-outline-nav">Book Appointment</a></li>
+    </ul>
+    <div class="nav-toggle" id="navToggle" aria-label="menu">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section id="home" class="hero">
+  <div class="container hero-grid">
+    <div class="hero-content">
+      <h1>Reliable Auto Repair in <span>Calgary</span></h1>
+      <p>Professional automotive repair and maintenance with honest service, experienced technicians, and quality workmanship.</p>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn-primary"><i class="fas fa-calendar-check"></i> Book Appointment</a>
+        <a href="tel:+14032871125" class="btn-secondary"><i class="fas fa-phone-alt"></i> Call (403) 287-1125</a>
+      </div>
+    </div>
+    <div class="hero-image"></div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="container about-grid">
+    <div>
+      <h2 class="section-title">Calgary's trusted auto shop</h2>
+      <p style="font-size:1.05rem; color:#444; max-width:540px;">Red Rock Auto Repair is committed to honest repairs, transparent pricing, and dependable service for Calgary drivers. We blend modern dealership precision with a family-owned approach.</p>
+      <div class="about-icons">
+        <div class="icon-card"><i class="fas fa-handshake"></i><h4>Honest Service</h4></div>
+        <div class="icon-card"><i class="fas fa-user-cog"></i><h4>Experienced Technicians</h4></div>
+        <div class="icon-card"><i class="fas fa-check-circle"></i><h4>Quality Parts</h4></div>
+        <div class="icon-card"><i class="fas fa-smile"></i><h4>Customer Satisfaction</h4></div>
+      </div>
+    </div>
+    <div class="about-image"></div>
+  </div>
+</section>
+
+<!-- Services -->
+<section id="services" class="bg-light">
+  <div class="container">
+    <h2 class="section-title">Our Services</h2>
+    <p class="section-sub">From oil changes to transmission service, we keep Calgary moving.</p>
+    <div class="services-grid">
+      <div class="service-card"><i class="fas fa-oil-can"></i><h4>Oil Changes</h4><p>Full synthetic & high-mileage</p></div>
+      <div class="service-card"><i class="fas fa-car"></i><h4>Brake Repair</h4><p>Pads, rotors, calipers</p></div>
+      <div class="service-card"><i class="fas fa-microchip"></i><h4>Engine Diagnostics</h4><p>Check engine & performance</p></div>
+      <div class="service-card"><i class="fas fa-cogs"></i><h4>Suspension Repair</h4><p>Shocks, struts, alignment</p></div>
+      <div class="service-card"><i class="fas fa-steering-wheel"></i><h4>Steering Repair</h4><p>Power steering, tie rods</p></div>
+      <div class="service-card"><i class="fas fa-bolt"></i><h4>Battery Replacement</h4><p>Testing & install</p></div>
+      <div class="service-card"><i class="fas fa-circle"></i><h4>Tire Services</h4><p>Mount, balance, repair</p></div>
+      <div class="service-card"><i class="fas fa-arrows-alt-h"></i><h4>Wheel Alignment</h4><p>Precision laser alignment</p></div>
+      <div class="service-card"><i class="fas fa-fan"></i><h4>Heating & A/C</h4><p>Climate control repair</p></div>
+      <div class="service-card"><i class="fas fa-wrench"></i><h4>Engine Repair</h4><p>Major & minor engine work</p></div>
+      <div class="service-card"><i class="fas fa-cog"></i><h4>Transmission Service</h4><p>Fluid flush & repairs</p></div>
+      <div class="service-card"><i class="fas fa-clipboard-list"></i><h4>Scheduled Maintenance</h4><p>Manufacturer intervals</p></div>
+      <div class="service-card"><i class="fas fa-search"></i><h4>Vehicle Inspections</h4><p>Pre-purchase & safety</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Choose Us -->
+<section>
+  <div class="container">
+    <h2 class="section-title">Why Red Rock</h2>
+    <div class="features-grid">
+      <div class="feature-card"><i class="fas fa-user-check"></i><h4>Experienced Technicians</h4><p>ASE-certified, years of hands-on repair</p></div>
+      <div class="feature-card"><i class="fas fa-dollar-sign"></i><h4>Honest Pricing</h4><p>Transparent estimates, no surprises</p></div>
+      <div class="feature-card"><i class="fas fa-clock"></i><h4>Fast Turnaround</h4><p>Efficient service, back on the road</p></div>
+      <div class="feature-card"><i class="fas fa-star"></i><h4>Quality Parts</h4><p>OEM and premium aftermarket</p></div>
+      <div class="feature-card"><i class="fas fa-tablet-alt"></i><h4>Modern Diagnostics</h4><p>Advanced equipment, accurate fixes</p></div>
+      <div class="feature-card"><i class="fas fa-headset"></i><h4>Friendly Service</h4><p>We treat you like family</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section id="reviews" class="bg-light">
+  <div class="container">
+    <h2 class="section-title">What our customers say</h2>
+    <div class="testimonial-slider">
+      <div class="testimonial-card"><div class="stars">★★★★★</div><p>"Red Rock fixed my brakes fast and fair. Honest team."</p><h5>— Sarah M.</h5></div>
+      <div class="testimonial-card"><div class="stars">★★★★★</div><p>"They diagnosed a tricky engine issue other shops missed. Highly recommend."</p><h5>— James K.</h5></div>
+      <div class="testimonial-card"><div class="stars">★★★★★</div><p>"Clean shop, friendly staff, and quality work. My go-to in Calgary."</p><h5>— Laura D.</h5></div>
+      <div class="testimonial-card"><div class="stars">★★★★★</div><p>"Transparent pricing and on-time. Trustworthy service."</p><h5>— Mike R.</h5></div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact + Booking -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Visit us</h3>
+        <p><i class="fas fa-map-pin"></i> 5011 11 St SE, Calgary, AB T2H 1M7</p>
+        <p><i class="fas fa-phone-alt"></i> <a href="tel:+14032871125" style="color:var(--charcoal); text-decoration:none;">(403) 287-1125</a></p>
+        <p><i class="far fa-clock"></i> Mon–Fri 8:00am – 5:00pm</p>
+        <p><i class="fas fa-code"></i> Plus Code: 2X56+RV Calgary</p>
+        
+        <!-- Google Maps Embed -->
+        <div class="map-container">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2507.876309876543!2d-114.06123456789012!3d51.03765432109876!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5371700e8b8b8b8b%3A0x123456789abcdef!2s5011%2011%20St%20SE%2C%20Calgary%2C%20AB%20T2H%201M7!5e0!3m2!1sen!2sca!4v1700000000000!5m2!1sen!2sca" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+        
+        <a href="tel:+14032871125" class="btn-primary" style="width:100%; justify-content:center; margin-top:12px;"><i class="fas fa-phone-alt"></i> Call Now</a>
+      </div>
+      
+      <div class="booking-wrapper">
+        <iframe 
+          src="https://tally.so/embed/ODKkap?dynamicHeight=1" 
+          loading="lazy"
+          title="Book an appointment with Red Rock Auto Repair">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="logo-placeholder" style="background:#222; display:inline-flex; margin-bottom:14px;">
+        <img src="https://placehold.co/80x40/D73A2F/FFFFFF?text=RR" alt="Red Rock Logo" style="height:32px; width:auto;">
+      </div>
+      <p style="margin:16px 0 8px; font-size:0.95rem;">5011 11 St SE, Calgary, AB T2H 1M7</p>
+      <p><a href="tel:+14032871125">(403) 287-1125</a></p>
+    </div>
+    <div><h4>Quick Links</h4><ul style="list-style:none; margin-top:12px; line-height:2;"><li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#reviews">Reviews</a></li></ul></div>
+    <div><h4>Services</h4><ul style="list-style:none; margin-top:12px; line-height:2;"><li>Oil Change</li><li>Brake Repair</li><li>Engine Diag</li><li>Transmission</li></ul></div>
+    <div><h4>Hours</h4><ul style="list-style:none; margin-top:12px; line-height:2;"><li>Mon–Fri: 8am–5pm</li><li>Sat: Closed</li><li>Sun: Closed</li></ul></div>
+  </div>
+  <div class="container footer-copy">&copy; 2026 Red Rock Auto Repair. Honest service. Premium care.</div>
+</footer>
+
+<script>
+  // mobile toggle
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+</script>
+</body>
+</html>
